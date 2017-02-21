@@ -14,7 +14,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     var businesses: [Business]!
     var filteredbusinesses: [Business]!
     var searchBar = UISearchBar()
-    var offset = 20
     @IBOutlet weak var tableView: UITableView!
     var isMoreDataLoading = false
     
@@ -61,8 +60,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func loadMoreData(){
-        self.offset = self.offset + 20
-        Business.searchWithTerm(term: "", sort: .distance, categories: [], deals: false, offset: offset, completion: { (businesses: [Business]?, error: Error? ) -> Void in
+        Business.searchWithTerm(term: "", sort: .distance, categories: [], deals: false, offset: self.businesses?.count, completion: { (businesses: [Business]?, error: Error? ) -> Void in
             
             self.businesses.append(contentsOf: businesses!)
             self.filteredbusinesses = self.businesses
